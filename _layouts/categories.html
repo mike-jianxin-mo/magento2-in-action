@@ -1,0 +1,77 @@
+---
+layout: page
+permalink: /categories/
+title: Categories
+---
+
+<div id="archives">
+  {% for category in site.categories %}
+  <div class="archive-group">
+    {% capture category_name %}{{ category | first }}{% endcapture %}
+    <div id="#{{ category_name | slugize }}"></div>
+    <p></p>
+
+    <h3 class="category-head">{{ category_name }}</h3>
+    <a name="{{ category_name | slugize }}"></a>
+    {% for post in site.categories[category_name] %}
+    <article class="archive-item">
+      <h4><a href="{{ site.baseurl }}{{ post.url }}">{{post.title}}</a></h4>
+    </article>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {%- include head.html -%} {% if page.previous %}
+    <link rel="prev" href="{{site.baseurl}}{{page.previous.url}}" />
+    {% else %}
+    <link rel="prev" href="{{site.baseurl}}/" />
+    {% endif %} {% if page.next %}
+    <link rel="next" href="{{site.baseurl}}{{page.next.url}}" />
+    {% endif %}
+  </head>
+  <body>
+    <div class="book">
+      {%- include toc-date.html -%}
+
+      <div class="book-body">
+        {%- include body.html -%} {% if page.previous %}
+        <a
+          href="{{site.baseurl}}{{page.previous.url}}"
+          class="navigation navigation-prev navigation-unique"
+          aria-label="Previous page: {{page.previous.title}}"
+        >
+          <i class="fa fa-angle-left"></i>
+        </a>
+        {% else %}
+        <a
+          href="{{site.baseurl}}/"
+          class="navigation navigation-prev navigation-unique"
+          aria-label="Previous page: {{site.title}}"
+        >
+          <i class="fa fa-angle-left"></i>
+        </a>
+        {% endif %} {% if page.next %}
+        <a
+          href="{{site.baseurl}}{{page.next.url}}"
+          class="navigation navigation-next navigation-unique"
+          aria-label="Next page: {{page.next.title}}"
+        >
+          <i class="fa fa-angle-right"></i>
+        </a>
+        {% endif %}
+      </div>
+
+      <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({%- include metadata-post.json.tpl -%});
+        });
+      </script>
+    </div>
+
+    {%- include footer.html -%}
+  </body>
+</html>
