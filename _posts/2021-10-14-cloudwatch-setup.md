@@ -17,7 +17,9 @@ https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/create-iam-roles-
 #### download and install
 
 wget https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
+
 sudo dpkg -i -E ./amazon-cloudwatch-agent.deb
+
 ls /opt/aws/amazon-cloudwatch-agent/bin/config.json
 
 #### install aws
@@ -35,6 +37,7 @@ sudo aws configure --profile AmazonCloudWatchAgent
 
 This configuration works fine.
 The option details can be reference(for Yes or No):
+
 https://www.wellarchitectedlabs.com/cost/200_labs/200_aws_resource_optimization/4_memory_plugin/
 
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
@@ -42,6 +45,7 @@ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
 #### run the agent
 
 start cloudwatch
+
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json -s
 
 #### errors
@@ -49,8 +53,11 @@ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-c
 tail /opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log
 
 2021-10-14T04:59:43Z E! [outputs.cloudwatchlogs] Aws error received when sending logs to staging_varnish_test/i-09d213ee4b5206efd: UnrecognizedClientException: The security token included in the request is invalid.
+
 2021-10-14T04:59:43Z W! [outputs.cloudwatchlogs] Retried 441 time, going to sleep 57.148066432s before retrying.
+
 2021-10-14T05:00:40Z E! [outputs.cloudwatchlogs] Aws error received when sending logs to staging_varnish_test/i-09d213ee4b5206efd: UnrecognizedClientException: The security token included in the request is invalid.
+
 2021-10-14T05:00:40Z W! [outputs.cloudwatchlogs] Retried 442 time, going to sleep 36.606756923s before retrying.
 
 #### reinstall aws cli
@@ -71,16 +78,23 @@ sudo aws configure --profile AmazonCloudWatchAgent
 tail -n 50 /opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log
 
 2021-10-14T10:54:51Z E! [outputs.cloudwatchlogs] Aws error received when sending logs to staging_varnish_test/i-09d213ee4b5206efd: NoCredentialProviders: no valid providers in chain
+
 caused by: EnvAccessKeyNotFound: failed to find credentials in the environment.
+
 SharedCredsLoad: failed to load profile, .
+
 EC2RoleRequestError: no EC2 instance role found
+
 caused by: EC2MetadataError: failed to make EC2Metadata request
+
 status code: 404, request id:
+
 caused by: <?xml version="1.0" encoding="iso-8859-1"?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
  <head>
   <title>404 - Not Found</title>
  </head>
@@ -88,6 +102,7 @@ caused by: <?xml version="1.0" encoding="iso-8859-1"?>
   <h1>404 - Not Found</h1>
  </body>
 </html>
+
 2021-10-14T10:54:51Z W! [outputs.cloudwatchlogs] Retried 415 time, going to sleep 51.471788249s before retrying.
 
 Error: Caused by the IAM roles setting of the EC2 instance is missing
