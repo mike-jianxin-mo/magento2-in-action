@@ -6,6 +6,8 @@ category: [AWS, Data]
 layout: post
 ---
 
+##### Great AWS Knowledge Source: [1]
+
 #### check server type ARM or X86
 
 uname -m
@@ -107,3 +109,5 @@ caused by: <?xml version="1.0" encoding="iso-8859-1"?>
 
 Error: Caused by the IAM roles setting of the EC2 instance is missing
 Solution: Set the role.
+
+[1]: https://www.wellarchitectedlabs.com/
