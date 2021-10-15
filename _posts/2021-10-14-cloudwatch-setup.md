@@ -110,4 +110,36 @@ caused by: <?xml version="1.0" encoding="iso-8859-1"?>
 Error: Caused by the IAM roles setting of the EC2 instance is missing
 Solution: Set the role.
 
+##### No log has been synced to cloud
+
+No log has been synced to cloud, but the server memory usage data has been synced successfully.
+
+Ref: https://stackoverflow.com/questions/58658744/cloudwatch-agent-not-sending-logs-to-cloudwatch
+
+This is caused by the permission error. Solved it by followed the above instruction
+
+sudo nano /opt/aws/amazon-cloudwatch-agent/bin/config.json
+
+At the top of the file you will see:
+
+"agent": {
+"metrics_collection_interval": 60,
+"run_as_user": "cwagent"
+},
+You need to change run_as_user to root, like:
+
+"agent": {
+"metrics_collection_interval": 60,
+"run_as_user": "root"
+},
+Once you have changed that, you simply reload the config file:
+
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json -s
+
+And then restart the service:
+
+sudo systemctl restart amazon-cloudwatch-agent.service
+
+It works!!!!
+
 [1]: https://www.wellarchitectedlabs.com/
