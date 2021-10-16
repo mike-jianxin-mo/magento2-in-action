@@ -18,39 +18,10 @@ sudo tail -f /var/log/apache2/access.log
 
 ##### JSON format apache log
 
-###### Current Log:
-
-LogFormat "%v:%p %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" vhost_combined
-
-# add the forward ip address to log message
-
-LogFormat "%{X-Forwarded-For}i %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined
-
-# LogFormat "%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined
-
-LogFormat "%h %l %u %t \"%r\" %>s %O" common
-LogFormat "%{Referer}i -> %U" referer
-LogFormat "%{User-agent}i" agent
-
-###### JSON format
-
-Replace the current log shown above to the following:
-
 https://gist.github.com/mike-jianxin-mo/83b3c230cf86a3ae0ff5dc4bf93eeec3
 
 #### Log details
 
 Ref: https://www.loggly.com/ultimate-guide/apache-logging-basics/
-
-LogFormat "%h %l %u %t \"%r\" %>s %b" common
-CustomLog "logs/access_log" common
-
-You can find a full list of fields in the Apache log documentation. We recommend using at least the following five fields, as they are important for monitoring server health and for troubleshooting issues:
-
--   %>s – The HTTP status code for the request. This shows the final request status after any internal redirection; for the original status, use %s.
--   %U – The URL path requested, excluding any additional URL parameters such as a query string.
--   %a – The IP address of the client making the request. This is useful for identifying traffic from a particular source.
--   %T – How long it took to process the request in seconds. This is useful for measuring the speed of your site. Use %D to make the same measurement in microseconds.
--   %{UNIQUE_ID}e – Also commonly known as the request ID, this logs a unique identifier with each request. This is useful for tracing a request from Apache to your web application server.
 
 [1]: https://aws.amazon.com/blogs/mt/simplifying-apache-server-logs-with-amazon-cloudwatch-logs-insights/
