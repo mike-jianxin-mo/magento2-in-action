@@ -1,5 +1,5 @@
 ---
-title: CoudWatch Setup
+title: CoudWatch Setup (1)
 author: Mike Mo
 date: 2021-10-14
 category: [AWS, Data]
