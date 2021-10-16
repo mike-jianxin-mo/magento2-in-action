@@ -8,3 +8,7 @@ gem 'jemoji'
 gem 'webrick'
 
 # gem "rails"
+
+group :jekyll_plugins do
+    gem "jekyll-gist"
+end
