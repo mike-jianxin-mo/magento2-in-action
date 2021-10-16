@@ -36,7 +36,7 @@ LogFormat "%{User-agent}i" agent
 
 Replace the current log shown above to the following:
 
-LogFormat "{ \"time\":\"%{%Y-%m-%d}tT%{%T}t.%{msec_frac}tZ\", \"forwardIP\":\"%{X-Forwarded-For}i\", \"remoteIP\":\"%a\", \"vhost\":\"%v:%p\", \"host\":\"%V\", \"request\":\"%U\", \"query\":\"%q\", \"method\":\"%m\",\"process\":\"%D\", \"status\":\"%>s\", \"userAgent\":\"%{User-agent}i\", \"referer\":\"%{Referer}i\" }" combined
+https://gist.github.com/mike-jianxin-mo/83b3c230cf86a3ae0ff5dc4bf93eeec3
 
 #### Log details
 
